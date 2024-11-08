@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.mjs",
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start"
+ "scripts": {
+  "dev": "next dev -H 0.0.0.0 -p 23516",
+  "build": "next build",
+  "start": "next start -H 0.0.0.0 -p 23516"
   },
   "keywords": [],
   "author": "Bereket Denek",

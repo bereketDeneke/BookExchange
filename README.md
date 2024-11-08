@@ -152,39 +152,72 @@ The following wireframes illustrate the main pages for the **Book Exchange and R
 Here's the updated **Research Topics** section in the same format as the README:
 
 ---
+Here’s an expanded and detailed outline for each research topic based on the implementation of registration, session handling, login, and logout:
+
+---
+
 ## Research Topics
-- **Using Next.js for Full-Stack Development (10 points)**:
-  - **What is it?**  
-    Next.js is a powerful React framework that enables server-side rendering (SSR), static site generation (SSG), and API route handling. It supports full-stack development in a unified environment, allowing the platform to handle both frontend and backend needs seamlessly.
 
-  - **Why use it?**  
-    - **Unified Framework**: Integrating both backend and frontend in Next.js simplifies development and reduces complexity.
-    - **Performance Optimization**: SSR and SSG enhance performance, resulting in faster load times and improved SEO.
-    - **Simplified Deployment**: Next.js integrates easily with platforms like Vercel and Docker, which simplifies scaling and deployment.
-    - **Modular and Extensible**: Next.js’s plugin architecture supports feature expansions such as authentication, caching, and analytics, making it ideal for dynamic community applications.
+### Using Next.js for Full-Stack Development (10 points)
+- **What is it?**  
+  Next.js is a full-stack framework that extends React’s capabilities to include server-side rendering (SSR), static site generation (SSG), and API routes. This enables the creation of complex web applications that require both client-side interactivity and backend server logic.
 
-  - **List of Possible Candidate Modules or Solutions**:
-    - **NextAuth.js**: Provides secure user authentication, supporting OAuth, email/password login, and session management.
-    - **SWC (Speedy Web Compiler)**: Enhances performance through fast JavaScript/TypeScript compilation.
-    - **Axios or fetch()**: Enables efficient data fetching between the client and server, crucial for functionalities like book listing, browsing, and request handling.
-    - **Prisma or Sequelize**: As ORM solutions, they connect Next.js with the database, facilitating optimized relational database management.
+- **Why use it?**  
+  - **Unified Framework**: Next.js provides a single environment for both frontend and backend development, which simplifies handling features like authentication, data fetching, and session management within one framework.
+  - **Performance Optimization**: With SSR and SSG, pages load faster, enhancing the user experience and SEO.
+  - **Modular Structure**: Next.js supports easy-to-use modules and configurations, allowing for the integration of additional features such as session management and secure data handling.
+  - **Developer Productivity**: With built-in API routes, developers can create RESTful endpoints directly in the framework, allowing seamless communication between frontend and backend for login, logout, and registration.
 
-- **User Authentication with Passport.js (5 points)**:
-  - Implement secure user authentication using Passport.js, including registration, login, logout, and session management.
-  - Hash and salt passwords using bcrypt for security.
-  - Protect routes to ensure only authenticated users can access certain pages.
+- **List of Possible Candidate Modules or Solutions**:
+  - **NextAuth.js**: A library for handling user authentication and session management. It supports various login strategies, including OAuth, email, and password.
+  - **SWC Compiler**: Offers fast compilation and transpilation, improving the speed of development and build times.
+  - **Axios or fetch()**: Facilitates data fetching from the API routes to the client, allowing seamless integration for book listing, user registration, and login/logout actions.
+  - **Prisma or Sequelize**: As ORMs, these tools streamline database interactions, making it easier to manage user and book data with optimized queries.
 
-- **Automated Functional Testing with Mocha, Chai, and Supertest (5 points)**:
-  - Write server-side tests to verify API endpoints and application logic.
-  - Test critical functionalities such as user registration, login, book listing, and requesting.
-  - Ensure that the API responds correctly to various inputs and edge cases.
+### User Authentication with Custom Implementation (5 points)
+- **What is it?**  
+  User authentication in the project includes user registration, login, and session management. This involves securely handling user credentials, validating input, and ensuring that sessions are managed efficiently.
 
-- **End-to-End Testing with Cypress (4 points)**:
-  - Implement end-to-end tests to simulate user interactions with the application.
-  - Validate form submissions, navigation flows, and UI elements.
-  - Test the application in different browsers and screen sizes to ensure responsiveness.
+- **Implemented Features**:
+  - **User Registration**: Users must provide a unique email, username, and password. The password undergoes hashing with `bcrypt` to ensure security.
+  - **Login and Session Management**: When users log in, their credentials are validated, and a session token is generated. Users have the option to stay logged in for extended periods (7 days with “Remember Me”).
+  - **Logout Handling**: Clears the session token from cookies, effectively logging out the user and redirecting them to the login page.
 
-**Total Research Points: 24 points (only 10 required)**
+- **Key Implementation Techniques**:
+  - **bcrypt for Password Hashing**: Ensures passwords are stored securely by salting and hashing, preventing plain-text storage.
+  - **JWT (JSON Web Token)**: Used for session management, JWTs provide a secure, stateless authentication mechanism by embedding token data in HTTP cookies.
+  - **Server-Side Route Protection**: Only authenticated users can access restricted pages, such as the dashboard, which lists books.
+
+### Automated Functional Testing with Mocha, Chai, and Supertest (5 points)
+- **What is it?**  
+  Functional testing is essential for verifying that API endpoints and core functionalities work as expected, especially for crucial actions like registration, login, and book management.
+
+- **Implemented Test Scenarios**:
+  - **User Registration and Login Tests**: Ensures that the registration and login API endpoints validate input correctly and handle errors like duplicate emails or invalid credentials.
+  - **Session Management Testing**: Validates that the “Remember Me” functionality and session expiration times work as expected.
+  - **Book Listing and Request Handling**: Verifies that users can list, search, and interact with books as intended.
+
+- **Why Use Mocha, Chai, and Supertest?**  
+  - **Mocha** provides a flexible testing framework for organizing and running tests.
+  - **Chai** offers an intuitive assertion library for more readable and manageable test cases.
+  - **Supertest** enables testing of HTTP endpoints directly, allowing seamless integration with Next.js API routes.
+
+### End-to-End Testing with Cypress (4 points)
+- **What is it?**  
+  End-to-end testing involves simulating user actions from the front end to the back end, verifying that the full user experience works as expected. This includes testing the entire workflow for registration, login, and interacting with books.
+
+- **Implemented Tests**:
+  - **User Registration and Login Workflow**: Tests the registration form validations, including password strength and email uniqueness. It also validates the login workflow, including session handling.
+  - **Dashboard Navigation and Book Interactions**: Ensures that after logging in, users can view and interact with the list of sample books, navigate through filters, and view details.
+  - **Logout Flow**: Validates that logging out clears the session and redirects the user back to the login page.
+
+- **Why Use Cypress?**  
+  - **Realistic User Simulation**: Cypress allows for realistic browser-based testing, capturing both frontend and backend interactions.
+  - **Cross-Browser Testing**: Ensures the application works seamlessly across various browsers, improving overall user experience.
+  - **Automatic Waiting and Assertions**: Cypress simplifies asynchronous testing by automatically waiting for elements to load and provides intuitive assertions.
+
+
+**Total Research Points: 29 points (only 10 required)**
 
 ## [Link to Initial Main Project File](src/app.mjs)
 
