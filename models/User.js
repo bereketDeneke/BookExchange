@@ -16,6 +16,8 @@ class User {
       username,
       email,
       passwordHash,
+      profilePicture: 'N/A',
+      streaks: 0,
       salt,
     });
     return result.insertedId; // Return the ID of the created user
