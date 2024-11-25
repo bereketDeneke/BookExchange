@@ -52,7 +52,7 @@ export default async function handler(req, res) {
 
       // Set cookie options
       const cookieOptions = {
-        httpOnly: true,
+        httpOnly: false,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
         path: '/',
@@ -60,7 +60,7 @@ export default async function handler(req, res) {
       };
 
       // Set the JWT in a cookie
-      res.setHeader('Set-Cookie', serialize('token', token, cookieOptions));
+      res.setHeader('Set-Cookie', serialize('authorization', token, cookieOptions));
 
       // Send success response
       res.status(200).json({ message: 'Login successful' });

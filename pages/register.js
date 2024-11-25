@@ -41,11 +41,11 @@ export default function Register() {
       <div style={styles.card}>
         <h2 style={styles.heading}>Register</h2>
         <form style={styles.form} onSubmit={handleSubmit}>
-          <label style={styles.label}>Username</label>
+          <label style={styles.label}>Full Name</label>
           <input
             type="text"
             style={styles.input}
-            placeholder="Enter your username"
+            placeholder="Enter your Full Name"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required

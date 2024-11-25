@@ -1,0 +1,220 @@
+.profileContainer {
+    max-width: 800px;
+    margin: 70px auto;
+    padding: 20px;
+    background: #ffffff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    font-family: 'Roboto', sans-serif;
+  }
+  
+  .profileHeader {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  
+  .profileImageContainer {
+    position: relative;
+    width: 120px;
+    height: 120px;
+  }
+  
+  .profileImage {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #007bff;
+  }
+  
+  .cameraIcon {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background: #007bff;
+    color: #fff;
+    font-size: 18px;
+    padding: 8px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 2px solid #fff;
+    transition: background-color 0.3s ease;
+  }
+  
+  .cameraIcon:hover {
+    background-color: #0056b3;
+  }
+  
+  .fileInput {
+    display: none;
+  }
+  
+  .profileInfo {
+    flex: 1;
+  }
+  
+  .profileInfo h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  .streaks {
+    display: inline-block;
+    margin-top: 10px;
+    background: #ffc107;
+    color: #fff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  
+  /* Profile Form */
+  .profileForm {
+    margin-top: 20px;
+  }
+  
+  .profileForm h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .inputGroup {
+    margin-bottom: 20px;
+  }
+  
+  .inputGroup label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 8px;
+  }
+  
+  .inputField {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.3s ease;
+  }
+  
+  .inputField:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 4px rgba(0, 123, 255, 0.2);
+  }
+  
+  .updateButton {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.3s, background 0.3s;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+  
+  .updateButton:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #0056b3, #003f7d);
+  }
+  
+  /* Books Container */
+  .booksContainer {
+    margin-top: 40px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .booksContainer h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .searchContainer {
+    margin-bottom: 20px;
+  }
+  
+  .searchInput {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+  }
+  
+  .booksGrid {
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  .bookCard {
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    text-align: center;
+    margin-bottom: 5px;
+  }
+  
+  .bookCard:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .bookCard h4 {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .bookCard p {
+    font-size: 14px;
+    color: #555;
+  }
+  
+  @media (max-width: 768px) {
+    .profileContainer {
+      padding: 15px;
+    }
+  
+    .profileHeader {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .profileInfo {
+      margin-left: 0;
+      margin-top: 15px;
+    }
+  
+    .profileImageContainer {
+      width: 80px;
+      height: 80px;
+    }
+  
+    .streaks {
+      font-size: 12px;
+    }
+  }
+  

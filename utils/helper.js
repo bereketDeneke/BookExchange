@@ -14,7 +14,7 @@ export const logout = async () => {
   
     // Parse cookies to retrieve the token
     const cookies = parse(req.headers.cookie || '');
-    const token = cookies.token;
+    const token = cookies.authorization;
   
     if (!token) {
        if( resolvedUrl === '/login' || resolvedUrl === '/register'){
