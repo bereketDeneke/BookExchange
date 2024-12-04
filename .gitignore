@@ -6,3 +6,5 @@ node_modules
 coverage
 .next
 .env.local
+.husky
+.pytest_cache

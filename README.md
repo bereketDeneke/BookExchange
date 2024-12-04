@@ -149,15 +149,6 @@ The following wireframes illustrate the main pages for the **Book Exchange and R
 
 ## Research Topics
 
-Here's the updated **Research Topics** section in the same format as the README:
-
----
-Here’s an expanded and detailed outline for each research topic based on the implementation of registration, session handling, login, and logout:
-
----
-
-## Research Topics
-
 ### Using Next.js for Full-Stack Development (10 points)
 - **What is it?**  
   Next.js is a full-stack framework that extends React’s capabilities to include server-side rendering (SSR), static site generation (SSG), and API routes. This enables the creation of complex web applications that require both client-side interactivity and backend server logic.
@@ -179,7 +170,7 @@ Here’s an expanded and detailed outline for each research topic based on the i
   User authentication in the project includes user registration, login, and session management. This involves securely handling user credentials, validating input, and ensuring that sessions are managed efficiently.
 
 - **Implemented Features**:
-  - **User Registration**: Users must provide a unique email, username, and password. The password undergoes hashing with `bcrypt` to ensure security.
+  - **User Registration**: Users must provide a unique email, username, and password. The password undergoes hashing with bcrypt to ensure security.
   - **Login and Session Management**: When users log in, their credentials are validated, and a session token is generated. Users have the option to stay logged in for extended periods (7 days with “Remember Me”).
   - **Logout Handling**: Clears the session token from cookies, effectively logging out the user and redirecting them to the login page.
 
@@ -216,17 +207,44 @@ Here’s an expanded and detailed outline for each research topic based on the i
   - **Cross-Browser Testing**: Ensures the application works seamlessly across various browsers, improving overall user experience.
   - **Automatic Waiting and Assertions**: Cypress simplifies asynchronous testing by automatically waiting for elements to load and provides intuitive assertions.
 
+### Automated Code Quality with ESLint, Prettier, and Husky (5 points)
+- **What is it?**  
+  This setup automates code quality in Next.js projects by using ESLint for code linting, Prettier for consistent formatting, and Husky for pre-commit checks, ensuring clean and maintainable code.
 
-**Total Research Points: 29 points (only 10 required)**
+- **Implementation Steps**:
+  - **Install ESLint and Prettier** to detect syntax issues and enforce consistent formatting.
+  - **Configure ESLint Rules** to align with project coding standards.
+  - **Set Up Husky and Lint-Staged** to run ESLint and Prettier on staged files before every commit.
+  - **Enable Auto-Fix on Save** in the editor for real-time formatting.
+
+- **Benefits**:
+  - **Code Consistency**: Maintains uniform coding style.
+  - **Error Prevention**: Catches errors early in development.
+  - **Efficiency**: Reduces manual fixes, saving time.
+
+This approach simplifies code maintenance and enhances team productivity.
+### **Dynamic Profile Management** (7 points)
+- **What is it?**  
+  Enables users to update their profile information dynamically and interact with their book collection via AJAX.
+
+- **Implemented Features**:
+  - Dynamic profile picture upload and name update.
+  - AJAX-based updates to ensure a smooth user experience.
+  - Dummy book collection list to be replaced with live data uploads.
+  - Streak counter to gamify and encourage sharing activities.
+
+
+**Total Research Points: 36 points**
 
 ## [Link to Initial Main Project File](src/app.mjs)
 
 ## Annotations / References Used
+1. [Mocha and Chai Documentation](https://mochajs.org/) -  Used for writing server-side tests.
+2. [Supertest](https://github.com/visionmedia/supertest) -  Used for testing HTTP endpoints.
+3. [Cypress Documentation](https://docs.cypress.io/) - will be Used for end-to-end testing of the application's UI.
+4. [CSS](https://www.w3schools.com/css/)  used for styling and responsive design.
 
-1. [Passport.js Documentation](https://www.passportjs.org/docs/) - will be Used for implementing user authentication.
-2. [Mocha and Chai Documentation](https://mochajs.org/) - wil be Used for writing server-side tests.
-3. [Supertest](https://github.com/visionmedia/supertest) - will be Used for testing HTTP endpoints.
-4. [Cypress Documentation](https://docs.cypress.io/) - will be Used for end-to-end testing of the application's UI.
-5. [Bootstrap 5](https://getbootstrap.com/docs/5.3/getting-started/introduction/) - will be used for styling and responsive design.
-6. [Handlebars.js](https://handlebarsjs.com/) - used for server-side templating.
-7. [Express.js](https://expressjs.com/) - Used as the web framework for building the server.
+
+netstat -tuln | grep 23516
+sudo netstat -tulnp | grep 23516 
+sudo kill -9 12345

@@ -3,9 +3,8 @@ import Header from './components/header';
 import { getServerSideProps, logout } from '../utils/helper';
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import BookDetailModal from './bookDetails';
 
-
-export {getServerSideProps};
 
 export default function BookSearch() {
   const [search, setSearch] = useState('');
@@ -14,45 +13,38 @@ export default function BookSearch() {
   const [type, setType] = useState('All');
   const [books, setBooks] = useState([]); // State to store books with consistent ratings
   const bookRefs = useRef([]);
-  const [profilePicture, setProfilePicture] = useState('./defaultProfile.png');
-  const [username, setUsername] = useState('');
+  const [selectedBookDetail, setSelectedBookDetail] = useState(null); 
 
 
   // Generate books with consistent ratings on the client side
   useEffect(() => {
-    const fetchProfile = async () => {
+    const fetchBooks = async () => {
       try {
-        const token = Cookies.get('authorization'); // Retrieve the token from cookies
-        console.log('token', token);
-        const response = await axios.get('/api/profile/getProfile', {
-          headers: { Authorization: `Bearer ${token}` }
+        const token = Cookies.get('authorization');
+        const booksResponse = await fetch('/api/book/getAllBooks', {
+          headers: { Authorization: `Bearer ${token}` },
         });
 
-        const { username, profilePicture } = response.data;
-        setUsername(username);
-        setProfilePicture(profilePicture);
+        if (!booksResponse.ok) {
+          console.error('Failed to fetch books');
+        }
+        
+        const data = await booksResponse.json();
+        setBooks(data.books);
+
       } catch (error) {
         console.error('Error fetching profile:', error);
       }
     };
 
-    fetchProfile();
-
-    const generatedBooks = Array.from({ length: 50 }, (_, index) => ({
-      title: `Book Title ${index + 1}`,
-      description: 'A brief description of the book.',
-      status: index % 2 === 0 ? 'Available' : 'Unavailable',
-      type: index % 3 === 0 ? 'Free' : index % 3 === 1 ? 'Rent' : 'Sale',
-      rating: Math.floor(Math.random() * 5) + 1, // Random rating between 1 and 5
-    }));
-    setBooks(generatedBooks);
+    fetchBooks();
   }, []); // Runs only once on component mount
 
   // Filter logic
   const filteredBooks = books.filter((book) => {
     const matchesSearch = book.title.toLowerCase().includes(search.toLowerCase());
-    const matchesStatus = status === 'All' || book.status === status;
-    const matchesType = type === 'All' || book.type === type;
+    const matchesStatus = status === 'All' || book.status === status.toLowerCase();
+    const matchesType = type === 'All' || book.type === type.toLowerCase();
     const matchesRating = rating === 0 || book.rating >= rating;
 
     return matchesSearch && matchesStatus && matchesType && matchesRating;
@@ -62,11 +54,14 @@ export default function BookSearch() {
     setRating(newRating);
   };
 
+
+  const handleModalClose = () => {
+    setSelectedBookDetail(null); // Close the modal
+  };
+
   return (
     <>
       <Header
-        profilePicture={profilePicture || './defaultProfile.png'}
-        userName={username || 'Full Name'}
         onLogout={logout}
       />
       <div style={styles.container}>
@@ -159,15 +154,21 @@ export default function BookSearch() {
               <div style={styles.bookTags}>
                 <span style={styles.statusTag}>{book.status}</span>
                 <span style={styles.typeTag}>{book.type}</span>
+                {book.type === 'Sale' && <span style={styles.priceTag}>${book.price}</span>}
               </div>
+              
               <div style={styles.bookRating}>
                 {'★'.repeat(book.rating).padEnd(5, '☆')}
               </div>
-              <button style={styles.detailsButton}>Details</button>
+              <button style={styles.detailsButton} onClick={() => setSelectedBookDetail(book)}>Request</button>
             </div>
           ))}
         </div>
       </div>
+       {/* Modal */}
+       {selectedBookDetail && (
+        <BookDetailModal book={selectedBookDetail} onClose={handleModalClose} />
+      )}
     </>
   );
 }
@@ -314,5 +315,5 @@ const styles = {
     border: 'none',
     borderRadius: '6px',
     cursor: 'pointer',
-  },
+  }
 };

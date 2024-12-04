@@ -15,9 +15,9 @@ class User {
     const result = await usersCollection.insertOne({
       username,
       email,
-      passwordHash,
       profilePicture: 'N/A',
       streaks: 0,
+      passwordHash,
       salt,
     });
     return result.insertedId; // Return the ID of the created user
@@ -51,7 +51,7 @@ class User {
       { _id: new ObjectId(id) },
       { $set: updateData }
     );
-    return await this.findById(id); // Return the updated user
+    return updateData; //await this.findById(id); // Return the updated user
   }
 
   static async deleteUser(id) {

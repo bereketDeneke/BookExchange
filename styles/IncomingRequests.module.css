@@ -1,0 +1,186 @@
+.container {
+    padding: 2rem;
+    background-color: #f9f9f9;
+    min-height: 100vh;
+  }
+  
+  .title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #333;
+  }
+  
+  .requests {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .requestCard {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .bookTitle {
+    font-size: 18px;
+    font-weight: bold;
+    color: #4a3f8e;
+    margin-bottom: 1rem;
+  }
+  
+  .requestedBy {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .profilePicture {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #4a3f8e;
+  }
+  
+  .userName {
+    font-size: 16px;
+    font-weight: 500;
+    color: #555;
+  }
+  
+  .actionButtons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .approveButton {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4caf50;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .approveButton:hover {
+    background-color: #3e8e41;
+  }
+  
+  .declineButton {
+    padding: 0.5rem 1rem;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #f44336;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .declineButton:hover {
+    background-color: #d32f2f;
+  }
+  
+
+  .controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    justify-content: center;
+  }
+  
+  .searchInput {
+    flex: 1;
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .sortSelect {
+    padding: 0.5rem 1rem;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .searchInput:focus,
+  .sortSelect:focus {
+    border-color: #4a3f8e;
+    box-shadow: 0 0 5px rgba(74, 63, 142, 0.5);
+  }
+  
+  .spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80vh; /* Adjust for a full-page spinner */
+  }
+  
+  .spinner {
+    border: 8px solid rgba(0, 0, 0, 0.1);
+    border-top: 8px solid #3498db; /* Primary color */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  .errorMessage {
+    text-align: center;
+    color: red;
+    font-size: 1.2rem;
+    margin-top: 20px;
+  }
+  
+
+  .greyedButton {
+    background-color: #f0f0f0;
+    color: #888;
+    cursor: not-allowed;
+  }
+  
+  .iconApproved {
+    color: green;
+    margin-right: 5px;
+  }
+  
+  .iconDeclined {
+    color: red;
+    margin-right: 5px;
+  }
+  
+  .statusButton {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  

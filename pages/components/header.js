@@ -1,11 +1,21 @@
 import React from 'react';
 import { useRouter } from 'next/router';
+import { FaHome, FaInbox, FaListAlt, FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
+import { logout } from '../../utils/helper';
+import { useProfile } from '../context/UserContext'; 
 
-export default function Header({ profilePicture, userName, onLogout }) {
+export default function Header() {
   const router = useRouter();
+  const { profile } = useProfile(); // Access the profile from context
 
-  const handleNavigation = (route) => {
-    router.push(route);
+  const handleNavigation = (route, query = {}) => {
+    router.push({ pathname: route, query });
+  };
+
+  const navigateToProfile = () => {
+    // Encode the user ID in Base64
+    const base64UserId = btoa(profile._id);
+    handleNavigation('/profile', { user_id: base64UserId });
   };
 
   return (
@@ -15,54 +25,80 @@ export default function Header({ profilePicture, userName, onLogout }) {
           BXC
         </h1>
         <nav style={styles.navMenu}>
-          <span
+          <div
             style={{
               ...styles.navItem,
               ...(router.pathname === '/' ? styles.activeNavItem : {}),
             }}
             onClick={() => handleNavigation('/')}
+            title="Home"
           >
-            Home
-          </span>
-          <span
+            <FaHome style={styles.icon} />
+            <span
+              style={{
+                ...styles.navText,
+                ...(router.pathname === '/' ? styles.activeNavItem : {}),
+              }}
+            >
+              Home
+            </span>
+          </div>
+          <div
             style={{
               ...styles.navItem,
-              ...(router.pathname === '/incoming-requests'
-                ? styles.activeNavItem
-                : {}),
+              ...(router.pathname === '/incomingRequests' ? styles.activeNavItem : {}),
             }}
-            onClick={() => handleNavigation('/incoming-requests')}
+            onClick={() => handleNavigation('/incomingRequests')}
+            title="Incoming Requests"
           >
-            Incoming Requests
-          </span>
-          <span
+            <FaInbox style={styles.icon} />
+            <span
+              style={{
+                ...styles.navText,
+                ...(router.pathname === '/incomingRequests' ? styles.activeNavItem : {}),
+              }}
+            >
+              Incoming Requests
+            </span>
+          </div>
+          <div
             style={{
               ...styles.navItem,
-              ...(router.pathname === '/my-requests' ? styles.activeNavItem : {}),
+              ...(router.pathname === '/myRequests' ? styles.activeNavItem : {}),
             }}
-            onClick={() => handleNavigation('/my-requests')}
+            onClick={() => handleNavigation('/myRequests')}
+            title="My Requests"
           >
-            My Requests
-          </span>
+            <FaListAlt style={styles.icon} />
+            <span
+              style={{
+                ...styles.navText,
+                ...(router.pathname === '/myRequests' ? styles.activeNavItem : {}),
+              }}
+            >
+              My Requests
+            </span>
+          </div>
         </nav>
       </div>
       <div style={styles.profileContainer}>
         <img
-          src={profilePicture}
+          src={profile.profilePicture}
           alt="Profile"
           style={styles.profilePicture}
-          onClick={() => handleNavigation('/profile')}
+          onClick={navigateToProfile}
         />
-        <span style={styles.userName} onClick={() => handleNavigation('/profile')}>
-          {userName}
+        <span style={styles.userName} onClick={navigateToProfile}>
+          {profile.username || 'Loading...'}
         </span>
-        <button onClick={onLogout} style={styles.logoutButton}>
-          Logout
+        <button onClick={logout} style={styles.logoutButton}>
+          <FaSignOutAlt style={{ color: '#dc143c', fontSize: '24px', cursor: 'pointer' }} /> Logout
         </button>
       </div>
     </header>
   );
 }
+
 
 const styles = {
   header: {
@@ -71,7 +107,7 @@ const styles = {
     alignItems: 'center',
     padding: '0.5rem 2rem',
     background: 'linear-gradient(135deg, #f5f6f8, #ffffff)',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Adds depth
+    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
     position: 'fixed',
     top: 0,
     width: '100%',
@@ -96,21 +132,30 @@ const styles = {
     gap: '1rem',
   },
   navItem: {
-    fontSize: '16px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.3rem',
+    fontSize: '14px',
     fontWeight: '500',
-    color: '#333',
+    color: '#4a3f8e',
     cursor: 'pointer',
-    padding: '0.5rem 1rem',
+    padding: '0.5rem',
     borderRadius: '6px',
     transition: 'background-color 0.3s, color 0.3s',
   },
   activeNavItem: {
     backgroundColor: '#4a3f8e',
     color: '#ffffff',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)', // Adds a slight depth
+    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
   },
-  navItemHover: {
-    backgroundColor: '#e2e4e8', // Lighter background for hover
+  icon: {
+    fontSize: '18px',
+  },
+  navText: {
+    fontSize: '12px',
+    color: '#4a3f8e',
   },
   profileContainer: {
     display: 'flex',
@@ -126,12 +171,19 @@ const styles = {
     cursor: 'pointer',
   },
   userName: {
-    fontSize: '16px',
+    fontSize: '14px',
     fontWeight: '500',
     color: '#333',
     cursor: 'pointer',
+    maxWidth: '100px',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   },
   logoutButton: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.3rem',
     padding: '0.5rem 1rem',
     fontSize: '14px',
     fontWeight: 'bold',
@@ -141,8 +193,5 @@ const styles = {
     borderRadius: '6px',
     cursor: 'pointer',
     transition: 'background-color 0.3s',
-  },
-  logoutButtonHover: {
-    backgroundColor: '#3b3474',
   },
 };

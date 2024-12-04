@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { getServerSideProps } from '../utils/helper';
+import { useProfile } from './context/UserContext';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -8,7 +11,26 @@ export default function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const {profile, setProfile} = useProfile();
   const router = useRouter();
+
+  const handleProfileHeader = async()=>{
+    try {
+      const token = Cookies.get('authorization');
+      const response = await axios.get('/api/profile/getProfile', {
+      headers: { Authorization: `Bearer ${token}` },
+      });
+
+      const { username, profilePicture } = response.data;
+      setProfile({
+          username,
+          profilePicture: profilePicture || './defaultProfile.png',
+      });
+    } catch (error) {
+      console.error('Error fetching profile:', error);
+      logout();
+    }
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,6 +47,8 @@ export default function Login() {
     if (response.ok) {
       setSuccess('Login successful');
       setError('');
+
+      handleProfileHeader();
       router.push('/');
 
     } else {

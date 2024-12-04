@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dbConnect from '../../../utils/db';
 import User from '../../../models/User';
+import BookOffer from '../../../models/Offer';
 
 const JWT_SECRET = process.env.JWT_SECRET || '$ecret';
 
@@ -31,14 +32,21 @@ export default async function handler(req, res) {
       return res.status(404).json({ message: 'User not found' });
     }
 
-    // Send user profile
+    // Fetch user's book offers
+    const bookOffers = await BookOffer.findByUserId(userId);
+
+    // Send user profile along with book offers
     res.status(200).json({
       firstName: user.firstName,
       lastName: user.lastName,
       username: user.username,
       streaks: user.streaks,
       email: user.email,
-      profilePicture: user.profilePicture == 'N/A' ? './defaultProfile.png' : 'data:image/png;base64,' + user.profilePicture.toString('base64'), // Convert image to base64
+      profilePicture:
+        user.profilePicture === 'N/A'
+          ? './defaultProfile.png'
+          : 'data:image/png;base64,' + user.profilePicture.toString('base64'),
+      offers: bookOffers, // Include book offers in the response
     });
   } catch (error) {
     console.error('Error fetching profile:', error);

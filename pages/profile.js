@@ -1,39 +1,44 @@
 import React, { useState, useEffect } from 'react';
+import Cookies from 'js-cookie';
+import axios from 'axios';
 import { useRouter } from 'next/router';
+import { useProfile } from './context/UserContext';
 import styles from '../styles/Profile.module.css';
 import Header from './components/header';
-import { getServerSideProps, logout } from '../utils/helper';
-import axios from 'axios';
-import Cookies from 'js-cookie';
+import { logout } from '../utils/helper';
+import OfferModal from './components/offerModal';
+import ReadOfferModal from './components/offerDetail';
 
 const ProfileCard = () => {
   const [profilePicture, setProfilePicture] = useState('/defaultProfile.png'); // Default profile picture
   const [fullname, setFullname] = useState('');
-  const [email, setEmail ] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [email, setEmail] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
-  const [streaks, setStreaks] = useState(0); // Example streaks value
+  const [streaks, setStreaks] = useState(0);
+  const [offers, setOffers] = useState([]); // New state for book offers
+  const { profile, setProfile } = useProfile();
   const router = useRouter();
-
-  // List of books with IDs
-  const books = [
-    { id: 1, name: 'To Kill a Mockingbird' },
-    { id: 2, name: 'The Catcher in the Rye' },
-    { id: 3, name: '1984' },
-    { id: 4, name: 'Pride and Prejudice' },
-    { id: 5, name: 'The Great Gatsby' },
-    { id: 6, name: 'Moby Dick' },
-    { id: 7, name: 'War and Peace' },
-    { id: 8, name: 'Jane Eyre' },
-    { id: 9, name: 'Brave New World' },
-    { id: 10, name: 'The Hobbit' },
-  ];
+  
+  const [modalData, setModalData] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  
+  const openModal = (data) => {
+    setModalData(data);
+    setIsModalOpen(true);
+  };
+  
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalData(null);
+  };
 
   // Handle search and filtering
-  const filteredBooks = books.filter((book) =>
-    book.name.toLowerCase().includes(searchTerm.toLowerCase())
+  let filteredBooks = offers.filter((offer) =>
+    offer.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Fetch profile information
+  // Fetch profile and offers information
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -42,11 +47,12 @@ const ProfileCard = () => {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const { profilePicture, email, streaks, username } = response.data;
+        const { profilePicture, email, streaks, username, offers } = response.data;
         setFullname(username);
         setStreaks(streaks);
         setEmail(email);
         setProfilePicture(profilePicture);
+        setOffers(offers || []); // Set offers data, default to empty array if undefined
 
       } catch (error) {
         console.error('Error fetching profile:', error);
@@ -76,6 +82,11 @@ const ProfileCard = () => {
         headers: { Authorization: `Bearer ${token}` },
       });
 
+      setProfile({
+        username: fullname,
+        profilePicture: profilePicture || './defaultProfile.png',
+      });
+
       alert('Profile updated successfully!');
     } catch (error) {
       console.error('Error updating profile:', error);
@@ -95,9 +106,36 @@ const ProfileCard = () => {
     }
   };
 
-  const navigateToBook = (id) => {
-    router.push(`/bookDetails/book?id=${id}`);
+  const handleAddBookClick = (status) => {
+    setShowModal(status);
   };
+
+  const navigateToBook = async (id) => {
+    try {
+      // Make a fetch request to get the book details
+      const response = await fetch(`/api/book/getDetails?book_id=${id}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        credentials: 'include', // Include cookies for token validation
+      });
+  
+      const result = await response.json();
+  
+      if (!response.ok) {
+        // Handle errors returned from the server
+        throw new Error(result.message || 'An error occurred while fetching the book details');
+      }
+  
+      // Pass the fetched data to the openModal function
+      openModal(result);
+    } catch (error) {
+      // Show an alert or handle the error appropriately
+      alert(`Failed to fetch book details: ${error.message}`);
+    }
+  };
+  
 
   return (
     <>
@@ -168,22 +206,37 @@ const ProfileCard = () => {
             />
           </div>
           <div className={styles.booksGrid}>
-            {filteredBooks.map((book) => (
+          {filteredBooks.map((offer) => (
               <div
-                key={book.id}
+                key={offer._id}
                 className={styles.bookCard}
-                onClick={() => navigateToBook(book.id)}
+                onClick={() => navigateToBook(offer._id)}
               >
-                <h4>{book.name}</h4>
-                <p>Book ID: {book.id}</p>
+                <h4 style={{ fontSize: '18px', marginBottom: '8px', color: '#333' }}>{offer.title}</h4>
+                <p style={{ fontSize: '14px', marginBottom: '4px', color: '#555' }}>Type: {offer.type}</p>
+                <p style={{ fontSize: '14px', marginBottom: '0', color: '#555' }}>
+                  {offer.type === 'free' ? '' : `Price: $${offer.price}`}
+                </p>
               </div>
             ))}
+
+            {/* Floating Plus Button */}
+            <div
+                key='addBook'
+                className={styles.addBookButton}
+                onClick={()=>handleAddBookClick(true)}
+              >
+                <h4>+</h4>
+              </div>
           </div>
         </div>
       </div>
+
+      {isModalOpen && <ReadOfferModal onClose={closeModal} offer={modalData} />}
+      {showModal && <OfferModal onClose={()=>handleAddBookClick(false)} />}
     </>
   );
 };
 
-export {getServerSideProps};
+// export {getServerSideProps};
 export default ProfileCard;
