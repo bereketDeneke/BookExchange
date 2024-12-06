@@ -134,18 +134,52 @@ The following wireframes illustrate the main pages for the **Book Exchange and R
 ![site map](./documentation/sitemap.png)
 
 ## User Stories or Use Cases
+### User Stories
 
-1. As a **non-registered user**, I can register a new account by providing my details to access the platform.
-2. As a **registered user**, I can log in to access my account.
-3. As a **user**, I can create a new book listing, providing details like title, description, availability duration, and exchange type.
-4. As a **user**, I can browse and search for books, using filters like status, rating, and type to find books I'm interested in.
-5. As a **user**, I can request to borrow or purchase a book by specifying the rental duration, urgency, and reason.
-6. As a **user**, I can view and edit my profile information, including updating my personal details and profile picture.
-7. As a **user**, I can view the books I have listed and manage them.
-8. As a **user**, I can leave a recommendation or review for a book I have read.
-9. As a **book owner**, I can view requests for my books and approve or decline them.
-10. As a **user**, I can track the status of my active requests, including viewing details and canceling pending requests.
-11. As a **book owner**, I can view incoming requests for my books, seeing details such as requester information, urgency, and rental duration, and can approve or decline requests.
+#### **Authentication and Security**
+1. **As a User**, I want to register with a unique email and secure password to access the platform safely.
+2. **As a User**, I want to log in with a "Remember Me" option to stay signed in for an extended session.
+3. **As a User**, I want to log out securely to terminate my session and ensure account safety.
+
+---
+
+#### **Book Browsing and Searching**
+4. **As a User**, I want to browse books with filters for availability, type, rating, and title to find relevant options.
+5. **As a User**, I want to view detailed information about a book to make informed decisions before requesting it.
+
+---
+
+#### **Book Posting and Management**
+6. **As a Book Owner**, I want to post books with details like title, description, and type (`Free`, `Rent`, `Sale`) to share them with the community.
+7. **As a Book Owner**, I want my book's status to update automatically to `Unavailable` when a request is approved.
+8. **As a Book Owner**, I want to filter my book collection by title to easily manage my listings.
+
+---
+
+#### **Request Management**
+9. **As a User**, I want to request books with details like rental duration, urgency, and negotiation price (for `Rent` or `Sale`) to communicate my needs effectively.
+10. **As a User**, I want to cancel a request at any time to maintain flexibility in managing my interactions.
+11. **As a Book Owner**, I want to view incoming requests with filters for urgency and duration to prioritize approvals.
+12. **As a User**, I want to track my requests under "My Requests" to monitor their status and next steps.
+
+---
+
+#### **User Profile Management**
+13. **As a User**, I want to update my profile picture and username to personalize my account.
+14. **As a User**, I want my email address to remain private unless necessary for request handling to ensure my privacy.
+15. **As a User**, I want to view and track streaks earned from book sharing to stay motivated.
+
+---
+
+#### **Book Rating and Reviews**
+16. **As a User**, I want to rate books when submitting a request to share feedback with the community.
+
+---
+
+#### **Community Interaction and Safety**
+17. **As a Book Owner**, I want requesters’ emails revealed only when I approve their request to protect user privacy.
+18. **As a User**, I want my email to remain hidden unless my request is approved to maintain security.
+19. **As a User**, I want the platform to prevent duplicate or self-requests to ensure fair usage.
 
 ## Research Topics
 

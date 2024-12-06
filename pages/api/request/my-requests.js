@@ -36,13 +36,14 @@ export default async function handler(req, res) {
         const user = await User.findById(poster_user_id);
         const Book = await BookOffer.findById(request.book_id);
 
-        const profilePicture = user.profilePicture ? `data:image/png;base64,${user.profilePicture}` : '';
+        const profilePicture = user.profilePicture !== 'N/A'? `data:image/png;base64,${user.profilePicture}` : './defaultProfile.png';
         return {
           ...request,
           user: {
             id: user._id,
             name: user.username,
             profilePicture,
+            email: request.status === 'approved' ? user.email : ''
           },
           book: {
             id: Book._id,

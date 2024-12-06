@@ -87,16 +87,6 @@ export default async function handler(req, res) {
       });
     }
 
-    console.log({
-      requester_user_id,
-      poster_user_id,
-      book_id,
-      urgencyLevel,
-      reason,
-      numberOfWeeks,
-      userPrice
-    });
-
     // Create the new request
     const newRequest = await Request.createRequest({
      requester_user_id,

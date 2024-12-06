@@ -81,6 +81,15 @@ class BookOffer {
     return await this.findById(id); // Return the updated book offer
   }
 
+  static async findById(id) {
+    const client = await dbConnect();
+    const db = client.db(databaseName);
+    const bookOffersCollection = db.collection("bookOffers");
+
+    // Find book offer by ID
+    return await bookOffersCollection.findOne({ _id: new ObjectId(id) });
+  }
+
   static async deleteOffer(id) {
     const client = await dbConnect();
     const db = client.db(databaseName);

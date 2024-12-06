@@ -1,6 +1,7 @@
 import jwt from 'jsonwebtoken';
 import dbConnect from '../../../utils/db';
 import Request from '../../../models/Request';
+import BookOffer from '../../../models/Offer';
 
 const JWT_SECRET = process.env.JWT_SECRET || '$ecret';
 
@@ -50,9 +51,16 @@ export default async function handler(req, res) {
       return res.status(403).json({ message: 'You are not authorized to update this request.' });
     }
 
+
+    // update the book status based on the request status
+    const book = await BookOffer.findById(existingRequest.book_id);
+    if (book) {
+      const bookStatus = status === 'approved' ? 'unavailable' : 'available' ;
+      await BookOffer.updateOffer(existingRequest.book_id, { status: bookStatus });
+    }
+    
     // Update the request status
     const updatedRequest = await Request.updateRequest(requestId, { status });
-
     res.status(200).json({
       message: `Request status updated to ${status} successfully.`,
       request: updatedRequest,

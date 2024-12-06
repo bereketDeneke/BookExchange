@@ -37,13 +37,14 @@ export default async function handler(req, res) {
         const Book = await BookOffer.findById(request.book_id);
 
         // Combine request and user data
-        const profilePicture = user.profilePicture ? `data:image/png;base64,${user.profilePicture}` : '';
+        const profilePicture = user.profilePicture !== 'N/A'? `data:image/png;base64,${user.profilePicture}` : './defaultProfile.png';
         return {
           ...request,
           requestedBy: {
             id: user._id,
             name: user.username,
             profilePicture,
+            email: user.email
           },
           book: {
             id: Book._id,

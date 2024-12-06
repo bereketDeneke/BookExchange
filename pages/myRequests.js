@@ -92,6 +92,7 @@ export default function MyRequests() {
                     className={styles.profilePicture}
                   />
                   <span className={styles.userName}>{request.user.name}</span>
+                  <span className={styles.userName}>{request.user.email}</span>
                 </div>
                 <h2 className={styles.bookTitle}>
                   Request for: <i>{request.book.title}</i>

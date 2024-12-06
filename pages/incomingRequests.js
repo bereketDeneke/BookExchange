@@ -127,15 +127,18 @@ export default function IncomingRequests() {
           <div className={styles.requests}>
             {sortedRequests.map((request) => (
               <div key={request._id} className={styles.requestCard}>
-                <h2 className={styles.bookTitle}>Book: {request.book.title}</h2>
-                <div className={styles.requestedBy}>
+                 <div className={styles.requestedBy}>
                   <img
                     src={request.requestedBy.profilePicture}
                     alt={request.requestedBy.name}
                     className={styles.profilePicture}
                   />
                   <span className={styles.userName}>{request.requestedBy.name}</span>
+                  <span className={styles.userName}>{request.requestedBy.email}</span>
                 </div>
+
+                <h2 className={styles.bookTitle}>Book: {request.book.title}</h2>
+               
                 {request.userPrice === 0 ? (
                   <p>
                     <strong>Requested Duration:</strong> {`${request.numberOfWeeks} weeks`}
