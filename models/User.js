@@ -1,18 +1,22 @@
-// models/user.js
-import dbConnect from '../utils/db';
-import { ObjectId } from 'mongodb';
+import mongoose from 'mongoose';
+import BaseModel from './BaseModel.js';
 
-const databaseName = process.env.DATABAE_NAME;
+const { Schema } = mongoose;
 
-// User model functions
-class User {
+const UserSchema = new Schema({
+  username: { type: String, required: true },
+  email: { type: String, unique: true, required: true },
+  profilePicture: { type: String, default: 'N/A' },
+  streaks: { type: Number, default: 0 },
+  passwordHash: { type: String, required: true },
+  salt: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+});
+
+class UserModel extends BaseModel {
   static async createUser({ username, email, passwordHash, salt }) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const usersCollection = db.collection("users");
-
-    // Insert a new user with the given details
-    const result = await usersCollection.insertOne({
+    const user = await this.create({
       username,
       email,
       profilePicture: 'N/A',
@@ -20,48 +24,15 @@ class User {
       passwordHash,
       salt,
     });
-    return result.insertedId; // Return the ID of the created user
+    return user._id;
   }
 
   static async findByEmail(email) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const usersCollection = db.collection("users");
-
-    // Find user by email
-    return await usersCollection.findOne({ email });
-  }
-
-  static async findById(id) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const usersCollection = db.collection("users");
-
-    // Find user by ID, converting `id` to an ObjectId if it's a string
-    return await usersCollection.findOne({ _id: new ObjectId(id) });
-  }
-
-  static async updateUser(id, updateData) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const usersCollection = db.collection("users");
-
-    // Update user details
-    await usersCollection.updateOne(
-      { _id: new ObjectId(id) },
-      { $set: updateData }
-    );
-    return updateData; //await this.findById(id); // Return the updated user
-  }
-
-  static async deleteUser(id) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const usersCollection = db.collection("users");
-
-    // Delete user by ID
-    return await usersCollection.deleteOne({ _id: new ObjectId(id) });
+    return this.findOne({ email }).exec();
   }
 }
 
-module.exports = User;
+UserSchema.loadClass(UserModel);
+
+const User = mongoose.models.users || mongoose.model('users', UserSchema);
+export default User;

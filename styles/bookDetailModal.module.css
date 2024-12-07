@@ -1,107 +1,107 @@
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-  
-  .modalContent {
-    background: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    width: 500px;
-    max-width: 90%;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .modalContent h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .modalContent p {
-    font-size: 1rem;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  .inputGroup {
-    margin-bottom: 15px;
-  }
-  
-  .inputGroup label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .select,
-  .input,
-  .textarea {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  .textarea {
-    resize: none;
-    height: 100px;
-  }
-  
-  .actions {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .submitButton {
-    background: #4a3f8e;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .submitButton:hover {
-    background: #3b3474;
-  }
-  
-  .cancelButton {
-    background: #ccc;
-    color: #333;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-  
-  .cancelButton:hover {
-    background: #aaa;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
 
-  .starRating {
-    display: flex;
-    gap: 5px;
-    cursor: pointer;
-  }
-  
-  .filledStar {
-    color: gold;
-    font-size: 24px;
-  }
-  
-  .emptyStar {
-    color: lightgray;
-    font-size: 24px;
-  }
-  
+.modalContent {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.modalContent h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.modalContent p {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+.inputGroup {
+  margin-bottom: 15px;
+}
+
+.inputGroup label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.select,
+.input,
+.textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.textarea {
+  resize: none;
+  height: 100px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.submitButton {
+  background: #4a3f8e;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.submitButton:hover {
+  background: #3b3474;
+}
+
+.cancelButton {
+  background: #ccc;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.cancelButton:hover {
+  background: #aaa;
+}
+
+.starRating {
+  display: flex;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.filledStar {
+  color: gold;
+  font-size: 24px;
+}
+
+.emptyStar {
+  color: lightgray;
+  font-size: 24px;
+}
+
+/*# sourceMappingURL=bookDetailModal.module.css.map */

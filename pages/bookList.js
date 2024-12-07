@@ -13,8 +13,7 @@ export default function BookSearch() {
   const [type, setType] = useState('All');
   const [books, setBooks] = useState([]); // State to store books with consistent ratings
   const bookRefs = useRef([]);
-  const [selectedBookDetail, setSelectedBookDetail] = useState(null); 
-
+  const [selectedBookDetail, setSelectedBookDetail] = useState(null);   
 
   // Generate books with consistent ratings on the client side
   useEffect(() => {
@@ -154,8 +153,11 @@ export default function BookSearch() {
               <div style={styles.bookTags}>
                 <span style={styles.statusTag}>{book.status}</span>
                 <span style={styles.typeTag}>{book.type}</span>
-                {book.type === 'Sale' && <span style={styles.priceTag}>${book.price}</span>}
               </div>
+
+              <span style={styles.priceTag}>
+                    {book.type === 'rent' ? `Weekly Rental Fee: $${book.price}` : `Book Price: $${book.price}`}
+                </span>
               
               <div style={styles.bookRating}>
                 {'★'.repeat(book.rating).padEnd(5, '☆')}
@@ -315,5 +317,18 @@ const styles = {
     border: 'none',
     borderRadius: '6px',
     cursor: 'pointer',
-  }
+  },
+  priceTag: {
+    fontSize: '16px',
+    fontWeight: 'bold',
+    color: '#d32f2f',
+    padding: '0.25rem 0.5rem',
+    borderRadius: '4px',
+    backgroundColor: '#fbe9e7',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    textAlign: 'center',
+    width: 'auto',
+  },
+  
 };

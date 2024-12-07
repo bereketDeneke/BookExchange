@@ -1,103 +1,40 @@
-import dbConnect from '../utils/db';
-import { ObjectId } from 'mongodb';
+import mongoose from 'mongoose';
+import BaseModel from './BaseModel.js';
 
-const databaseName = process.env.DATABASE_NAME;
+const { Schema } = mongoose;
 
-// BookOffer model functions
-class BookOffer {
+const BookOfferSchema = new Schema({
+  title: { type: String, required: true },
+  description: { type: String },
+  rating: { type: Number, default: 1 },
+  status: { type: String, default: 'available' },
+  type: { type: String, enum: ['free', 'rent', 'sale'], required: true },
+  price: { type: Number, default: 0 },
+  userId: { type: Schema.Types.ObjectId, ref: 'users', required: true },
+  createdAt: { type: Date, default: Date.now },
+  updatedAt: { type: Date, default: Date.now },
+});
+
+class BookOfferModel extends BaseModel {
   static async createOffer({ title, description, type, price, userId }) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const bookOffersCollection = db.collection("bookOffers");
-
-    // Insert a new book offer with the given details
-    const result = await bookOffersCollection.insertOne({
+    const offer = await this.create({
       title,
       description,
       rating: 1,
-      status: 'available', // unavailable
-      type, // "free", "rent", or "sale"
-      price: type === 'free' ? 0 : price, // Ensure price is 0 for "free" type
-      userId: new ObjectId(userId), // Reference to the user who created the offer
-      createdAt: new Date(),
-      updatedAt: new Date(),
+      status: 'available',
+      type,
+      price: type === 'free' ? 0 : price,
+      userId,
     });
-    return result.insertedId; // Return the ID of the created book offer
-  }
-
-  static async findById(id) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const bookOffersCollection = db.collection("bookOffers");
-
-    // Find book offer by ID
-    return await bookOffersCollection.findOne({ _id: new ObjectId(id) });
+    return offer._id;
   }
 
   static async findByUserId(userId) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const bookOffersCollection = db.collection("bookOffers");
-
-    // Find all book offers by a specific user
-    return await bookOffersCollection.find({ userId: new ObjectId(userId) }).toArray();
-  }
-
-  static async findAll({ filter = {}, sort = {}, limit = 10, skip = 0 }) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const bookOffersCollection = db.collection("bookOffers");
-
-    // Find all book offers with optional filters, sorting, and pagination
-    return await bookOffersCollection
-      .find(filter)
-      .sort(sort)
-      .skip(skip)
-      .limit(limit)
-      .toArray();
-  }
-
-  static async find() {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const bookOffersCollection = db.collection("bookOffers");
-
-    // Find all book offers with optional filters, sorting, and pagination
-    return await bookOffersCollection
-      .find({})
-      .toArray();
-  }
-
-  static async updateOffer(id, updateData) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const bookOffersCollection = db.collection("bookOffers");
-
-    // Update book offer details
-    await bookOffersCollection.updateOne(
-      { _id: new ObjectId(id) },
-      { $set: { ...updateData, updatedAt: new Date() } }
-    );
-    return await this.findById(id); // Return the updated book offer
-  }
-
-  static async findById(id) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const bookOffersCollection = db.collection("bookOffers");
-
-    // Find book offer by ID
-    return await bookOffersCollection.findOne({ _id: new ObjectId(id) });
-  }
-
-  static async deleteOffer(id) {
-    const client = await dbConnect();
-    const db = client.db(databaseName);
-    const bookOffersCollection = db.collection("bookOffers");
-
-    // Delete book offer by ID
-    return await bookOffersCollection.deleteOne({ _id: new ObjectId(id) });
+    return this.find({ userId }).exec();
   }
 }
 
-module.exports = BookOffer;
+BookOfferSchema.loadClass(BookOfferModel);
+
+const BookOffer = mongoose.models.bookOffers || mongoose.model('bookOffers', BookOfferSchema);
+export default BookOffer;

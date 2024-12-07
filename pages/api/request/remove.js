@@ -44,7 +44,7 @@ export default async function handler(req, res) {
     }
 
     // Delete the request
-    await Request.deleteRequest(requestId);
+    await Request.deleteById(requestId);
 
     res.status(200).json({ message: 'Request removed successfully.' });
   } catch (error) {

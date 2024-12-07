@@ -20,7 +20,7 @@ const requestSchema = z.object({
   ),
   urgencyLevel: z.enum(['low', 'medium', 'high'], 'Invalid urgency level'),
   reason: z.string().nonempty('Reason is required').max(1000, 'Reason cannot exceed 1000 characters'),
-  numberOfWeeks: z.number().min(1, 'Number of weeks must be at least 1').optional(),
+  numberOfWeeks: z.number().min(0, 'Number of weeks must be at least 1').optional(),
   userPrice: z.number().min(0, 'User price must be non-negative').optional(),
   rating: z.number().min(1, 'Rating must be at least 1').max(5, 'Rating cannot exceed 5'), // Add rating field
 });
@@ -98,7 +98,7 @@ export default async function handler(req, res) {
       userPrice
     });
 
-    await BookOffer.updateOffer(book_id, { rating });
+    await BookOffer.updateById(book_id, { rating });
 
     // Send success response
     res.status(201).json({

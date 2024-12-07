@@ -1,0 +1,98 @@
+body {
+  font-family: Arial, sans-serif;
+  height:90vh;
+  overflow-y: auto;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Set html and body to fit the viewport size */
+html, body {
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif; /* Optional, change to your desired font */
+  background-color: #f0f2f5; /* Optional background color */
+}
+
+/* Center all children within the body */
+#__next {
+  display: block;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* Add this CSS */
+@keyframes balloonPop {
+  0% {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+
+/* Scrollbar for WebKit Browsers (e.g., Chrome, Safari) */
+::-webkit-scrollbar {
+  width: 8px; /* Narrow width for a clean look */
+  height: 8px; /* For horizontal scrollbars */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #007bff; /* Match the button's blue color */
+  border-radius: 4px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition on hover */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0056b3; /* Slightly darker blue for hover effect */
+}
+
+::-webkit-scrollbar-track {
+  background: #f4f4f4; /* Light gray to match the card background */
+  border-radius: 4px; /* Rounded corners for the track */
+}
+
+/* For Firefox */
+* {
+  scrollbar-width: thin; /* Thin scrollbar for a sleek look */
+  scrollbar-color: #164c86 #f4f4f4; /* Thumb color and track color */
+}
+
+/* Optional: Add smooth transitions for scroll interactions */
+.scroll-container {
+  scroll-behavior: smooth; /* Smooth scrolling effect */
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+  ::-webkit-scrollbar-thumb {
+    background: #1652a1; /* A softer blue for dark mode */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #333; /* Dark gray for the track */
+  }
+
+  * {
+    scrollbar-color: #0f3f7e #333; /* Adjust colors for dark mode */
+  }
+}

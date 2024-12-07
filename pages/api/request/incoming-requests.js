@@ -35,11 +35,11 @@ export default async function handler(req, res) {
         const requester_user_id = request.requester_user_id.toString();
         const user = await User.findById(requester_user_id);
         const Book = await BookOffer.findById(request.book_id);
-
+        
         // Combine request and user data
         const profilePicture = user.profilePicture !== 'N/A'? `data:image/png;base64,${user.profilePicture}` : './defaultProfile.png';
         return {
-          ...request,
+          ...request._doc,
           requestedBy: {
             id: user._id,
             name: user.username,
@@ -48,9 +48,9 @@ export default async function handler(req, res) {
           },
           book: {
             id: Book._id,
-            title: Book.title,
+            title: Book.title ,
             price: Book.price,
-            status: Book.status
+            status: Book.status,
           },
         };
       })

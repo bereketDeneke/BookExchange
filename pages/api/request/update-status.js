@@ -56,11 +56,14 @@ export default async function handler(req, res) {
     const book = await BookOffer.findById(existingRequest.book_id);
     if (book) {
       const bookStatus = status === 'approved' ? 'unavailable' : 'available' ;
-      await BookOffer.updateOffer(existingRequest.book_id, { status: bookStatus });
+      if (book.status === 'unavailable' && status === 'approved') {
+        return res.status(400).json({ message: 'You have already approved a request for this book.' });
+      }
+      await BookOffer.updateById(existingRequest.book_id, { status: bookStatus });
     }
     
     // Update the request status
-    const updatedRequest = await Request.updateRequest(requestId, { status });
+    const updatedRequest = await Request.updateById(requestId, { status });
     res.status(200).json({
       message: `Request status updated to ${status} successfully.`,
       request: updatedRequest,

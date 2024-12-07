@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  height:90vh;
+  height: 90vh;
   overflow-y: auto;
 }
 
@@ -32,7 +32,6 @@ html, body {
   justify-content: center;
 }
 
-
 /* Add this CSS */
 @keyframes balloonPop {
   0% {
@@ -48,8 +47,6 @@ html, body {
     opacity: 1;
   }
 }
-
-
 /* Scrollbar for WebKit Browsers (e.g., Chrome, Safari) */
 ::-webkit-scrollbar {
   width: 8px; /* Narrow width for a clean look */
@@ -87,12 +84,12 @@ html, body {
   ::-webkit-scrollbar-thumb {
     background: #1652a1; /* A softer blue for dark mode */
   }
-
   ::-webkit-scrollbar-track {
     background: #333; /* Dark gray for the track */
   }
-
   * {
     scrollbar-color: #0f3f7e #333; /* Adjust colors for dark mode */
   }
 }
+
+/*# sourceMappingURL=global.css.map */

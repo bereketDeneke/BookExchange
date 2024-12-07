@@ -42,7 +42,7 @@ export default async function handler(req, res) {
     const sanitizedProfilePicture = is_safe ? profilePicture : 'N/A';
 
     // Update user profile in the database
-    const updatedUser = await User.updateUser(
+    const updatedUser = await User.updateById(
       userId,
       {
         username: sanitizedFullname,

@@ -3,7 +3,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { useProfile } from './context/UserContext';
-import styles from '../styles/Profile.module.css';
+import styles from '../styles/Profile.module.scss';
 import Header from './components/header';
 import { logout } from '../utils/helper';
 import OfferModal from './components/offerModal';

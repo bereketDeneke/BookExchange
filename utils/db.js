@@ -1,43 +1,27 @@
-// utils/db.js
-import { MongoClient, ServerApiVersion } from 'mongodb';
+// utils/db.j
+import mongoose from 'mongoose';
 
 const MONGODB_URI = process.env.DB_URI;
 
 if (!MONGODB_URI) {
-  throw new Error('Please define the MONGODB_URI environment variable in .env.local');
+  throw new Error('Please define the DB_URI environment variable in .env.local');
 }
 
-let cached = global.mongo;
-
-if (!cached) {
-  cached = global.mongo = { conn: null, promise: null };
-}
+let isConnected = false;
 
 async function dbConnect() {
-  if (cached.conn) {
-    return cached.conn;
+  if (isConnected) {
+    return mongoose;
   }
 
-  if (!cached.promise) {
-    const client = new MongoClient(MONGODB_URI, {
-      serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-      },
-    });
-
-    cached.promise = client.connect().then((client) => {
-      console.log("Connected to MongoDB successfully!");
-      return client;
-    }).catch((error) => {
-      console.error("Failed to connect to MongoDB:", error);
-      throw error;
-    });
-  }
-  
-  cached.conn = await cached.promise;
-  return cached.conn;
+  await mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    dbName: process.env.DATABASE_NAME,
+  });
+  isConnected = true;
+  console.log('Connected to MongoDB using Mongoose!');
+  return mongoose;
 }
 
-module.exports = dbConnect;
+export default dbConnect;

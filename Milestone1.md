@@ -39,7 +39,7 @@ Once the user logs in, they should be redirected to a dashboard displaying a lis
   [Registration implementation](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-bereketDeneke/blob/master/pages/register.js)  
   [Logout & page redirection implementation](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-bereketDeneke/blob/master/utils/helper.js)  
   [Profile Component Header implementation](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-bereketDeneke/blob/master/pages/components/header.js)  
-  [Global standard design customization](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-bereketDeneke/blob/master/styles/global.css)  
+  [Global standard design customization](https://github.com/nyu-csci-ua-0467-001-002-fall-2024/final-project-bereketDeneke/blob/master/styles/global.scss)  
 
 
  >> Back End: 

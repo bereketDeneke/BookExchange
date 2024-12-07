@@ -86,7 +86,7 @@ export default async function handler(req, res) {
 
     // Update user's streaks based on the type of offer
     const streakIncrement = type === 'rent' ? 2 : type === 'free' ? 3 : 1;
-    await User.updateUser(userId, { streaks: user.streaks + streakIncrement });
+    await User.updateById(userId, { streaks: user.streaks + streakIncrement });
 
     // Send success response
     res.status(201).json({

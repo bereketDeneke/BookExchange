@@ -5,7 +5,7 @@
   background: #ffffff;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 16px;
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
 }
 
 .profileHeader {
@@ -201,28 +201,22 @@
   .profileContainer {
     padding: 15px;
   }
-
   .profileHeader {
     flex-direction: column;
     text-align: center;
   }
-
   .profileInfo {
     margin-left: 0;
     margin-top: 15px;
   }
-
   .profileImageContainer {
     width: 80px;
     height: 80px;
   }
-
   .streaks {
     font-size: 12px;
   }
 }
-  
-
 .addBookButton {
   background: #f0f0f0; /* Light gray background */
   padding: 10px;
@@ -246,3 +240,4 @@
   background-color: #e6e6e6; /* Slightly darker gray on hover */
 }
 
+/*# sourceMappingURL=Profile.module.css.map */

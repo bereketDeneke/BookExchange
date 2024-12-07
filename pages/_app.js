@@ -1,5 +1,5 @@
 // pages/_app.js
-import '../styles/global.css';
+import '../styles/global.scss';
 import { UserProvider } from './context/UserContext'; // Import the provider
 
 

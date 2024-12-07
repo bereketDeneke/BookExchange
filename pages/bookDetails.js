@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Cookies from 'js-cookie'; // Assuming you're using this library for cookies
-import styles from '../styles/bookDetailModal.module.css'; // Create this CSS file for styling
+import styles from '../styles/bookDetailModal.module.scss'; // Create this CSS file for styling
 
 const StarRating = ({ rate, setRate }) => {
   return (
@@ -27,7 +27,7 @@ const BookDetailModal = ({ book, onClose }) => {
 
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    const [userPrice, numberOfWeeks] = book.type === 'sale' ? [0, duration] : [duration, 1];
+    const [userPrice, numberOfWeeks] = book.type === 'sale' ? [duration, 0] : [0, duration];
     const requestData = {
       poster_user_id: book.userId,
       book_id: book._id,
@@ -97,14 +97,14 @@ const BookDetailModal = ({ book, onClose }) => {
           {/* Duration or Price */}
           <div className={styles.inputGroup}>
             <label htmlFor="duration">
-              {book.type === 'sale' ? 'Price (in USD)' : 'Number of Weeks'}
+              {book.type === 'sale' || book.type === 'rent' ? 'Price (in USD)' : 'Number of Weeks'}
             </label>
             <input
               type="number"
               id="duration"
               value={duration}
               onChange={(e) => setDuration(e.target.value)}
-              min="1"
+              min="0"
               max="52"
               className={styles.input}
             />

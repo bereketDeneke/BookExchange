@@ -38,7 +38,7 @@ export default async function handler(req, res) {
 
         const profilePicture = user.profilePicture !== 'N/A'? `data:image/png;base64,${user.profilePicture}` : './defaultProfile.png';
         return {
-          ...request,
+          ...request._doc,
           user: {
             id: user._id,
             name: user.username,
@@ -49,7 +49,8 @@ export default async function handler(req, res) {
             id: Book._id,
             title: Book.title,
             price: Book.price,
-            status: Book.status
+            status: Book.status,
+            type: Book.type
           },
         };
       })

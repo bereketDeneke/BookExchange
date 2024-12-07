@@ -100,9 +100,14 @@ export default function MyRequests() {
                 <p>
                   <strong>Status:</strong> {request.status}
                 </p>
-                {request.userPrice === 0 ? (
+                {request.book.type === 'rent' || request.book.type === 'free' ? (
                   <p>
                     <strong>Requested Duration:</strong> {`${request.numberOfWeeks} weeks`}
+                    {request.book.type === 'rent' && (
+                      <p>
+                      <strong>Weekly rent price:</strong> ${`${request.book.price}/ weeks`}
+                      </p>
+                    )}
                   </p>
                 ) : (
                   <p>
