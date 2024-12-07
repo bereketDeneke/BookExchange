@@ -2,7 +2,7 @@ import React from 'react';
 import styles from '../../styles/offer.module.scss';
 
 export default function ReadOfferModal({ onClose, offer }) {
-  if (!offer) return null; // Return nothing if no offer is passed
+  if (!offer) {return null;} // Return nothing if no offer is passed
 
   return (
     <div className={styles.modalOverlay}>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import axios from 'axios';
-import styles from '../styles/MyRequests.module.css';
+import styles from '../styles/MyRequests.module.scss';
 import Header from './components/header';
 
 export default function MyRequests() {
@@ -129,6 +129,7 @@ export default function MyRequests() {
                 <div className={styles.actionButtons}>
                   {request.status === 'pending' ? (
                     <button
+                      id="cancelRequest"
                       className={styles.viewButton}
                       onClick={() => handleRemove(request._id)}
                     >

@@ -14,23 +14,22 @@ const UserSchema = new Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-class UserModel extends BaseModel {
-  static async createUser({ username, email, passwordHash, salt }) {
-    const user = await this.create({
-      username,
-      email,
-      profilePicture: 'N/A',
-      streaks: 0,
-      passwordHash,
-      salt,
-    });
-    return user._id;
-  }
+const UserModel = Object.create(BaseModel);
+UserModel.createUser = async function ({ username, email, passwordHash, salt }) {
+  const user = await this.create({
+    username,
+    email,
+    profilePicture: 'N/A',
+    streaks: 0,
+    passwordHash,
+    salt,
+  });
+  return user._id;
+};
 
-  static async findByEmail(email) {
-    return this.findOne({ email }).exec();
-  }
-}
+UserModel.findByEmail = async function (email) {
+  return this.findOne({ email });
+};
 
 UserSchema.loadClass(UserModel);
 

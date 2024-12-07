@@ -16,8 +16,17 @@ const RequestSchema = new Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-class RequestModel extends BaseModel {
-  static async createRequest({
+const RequestModel = Object.create(BaseModel);
+RequestModel.createRequest = async function ({
+  requester_user_id,
+  poster_user_id,
+  book_id,
+  urgencyLevel,
+  reason,
+  numberOfWeeks,
+  userPrice,
+}) {
+  const request = await this.create({
     requester_user_id,
     poster_user_id,
     book_id,
@@ -25,28 +34,19 @@ class RequestModel extends BaseModel {
     reason,
     numberOfWeeks,
     userPrice,
-  }) {
-    const request = await this.create({
-      requester_user_id,
-      poster_user_id,
-      book_id,
-      urgencyLevel,
-      reason,
-      numberOfWeeks,
-      userPrice,
-      status: 'pending',
-    });
-    return request._id;
-  }
+    status: 'pending',
+  });
+  return request._id;
+};
 
-  static async findByPosterUserId(posterUserId) {
-    return this.find({ poster_user_id: posterUserId }).exec();
-  }
+RequestModel.findByPosterUserId = async function (posterUserId) {
+  return this.find({ poster_user_id: posterUserId });
+};
 
-  static async findByRequesterUserId(requesterUserId) {
-    return this.find({ requester_user_id: requesterUserId }).exec();
-  }
-}
+RequestModel.findByRequesterUserId = async function (requesterUserId) {
+  return this.find({ requester_user_id: requesterUserId });
+};
+
 
 RequestSchema.loadClass(RequestModel);
 

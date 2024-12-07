@@ -1,19 +1,20 @@
-[X] Sass configuration is over
+
+## Sass Configuration
  line-number: 
  package.json:10 
  package.json:11
  + steps to start automathic compilation use:
    >  npm run watch:sass
 
-## Sass Configuration
 - **Source Directory**: `styles/`
 - **Sass style files under styles directory**
-offer.module.scss
-global.scss
-bookDetailModal.module.scss
-Profile.module.scss
-MyRequests.module.scss
-IncomingRequests.module.scss
+    offer.module.scss
+    global.scss
+    bookDetailModal.module.scss
+    Profile.module.scss
+    MyRequests.module.scss
+    IncomingRequests.module.scss
+  
  
 ## Build Tool Configuration
 - **Vite Configuration**: [`vite.config.js`](vite.config.js)
@@ -25,4 +26,7 @@ IncomingRequests.module.scss
 - **Lint Script**: `"lint": "eslint --ext .js,.vue src/"`
   - Runs ESLint on the entire codebase automatically on file change.
 
+
+## Cypress
+npx cypress run
 

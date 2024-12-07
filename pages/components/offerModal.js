@@ -70,13 +70,13 @@ export default function OfferModal({ onClose }) {
   };
 
   return (
-    <div className={styles.modalOverlay}>
+    <div className={styles.modalOverlay} id="offerModal_overlay">
       <div className={styles.modal}>
         <h2 className={styles.modalHeader}>Add New Book</h2>
 
         {message && (
           <div
-            className={`${styles.messageBox} ${
+             id={`${message.type}`} className={`${styles.messageBox} ${
               message.type === 'success' ? styles.success : styles.error
             }`}
           >
@@ -149,13 +149,14 @@ export default function OfferModal({ onClose }) {
           <div className={styles.buttonGroup}>
             <button
               type="button"
+              id="submitButton"
               className={styles.submitButton}
               onClick={handleSubmit}
               disabled={isSubmitting}
             >
               {isSubmitting ? 'Submitting...' : 'Submit'}
             </button>
-            <button type="button" className={styles.cancelButton} onClick={onClose}>
+            <button type="button" id="cancelButton" className={styles.cancelButton} onClick={onClose}>
               Cancel
             </button>
           </div>

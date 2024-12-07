@@ -15,24 +15,24 @@ const BookOfferSchema = new Schema({
   updatedAt: { type: Date, default: Date.now },
 });
 
-class BookOfferModel extends BaseModel {
-  static async createOffer({ title, description, type, price, userId }) {
-    const offer = await this.create({
-      title,
-      description,
-      rating: 1,
-      status: 'available',
-      type,
-      price: type === 'free' ? 0 : price,
-      userId,
-    });
-    return offer._id;
-  }
+const BookOfferModel = Object.create(BaseModel);
+BookOfferModel.createOffer = async function ({ title, description, type, price, userId }) {
+  const offer = await this.create({
+    title,
+    description,
+    rating: 1,
+    status: 'available',
+    type,
+    price: type === 'free' ? 0 : price,
+    userId,
+  });
+  return offer._id;
+};
 
-  static async findByUserId(userId) {
-    return this.find({ userId }).exec();
-  }
-}
+BookOfferModel.findByUserId = async function (userId) {
+  return this.find({ userId });
+};
+
 
 BookOfferSchema.loadClass(BookOfferModel);
 

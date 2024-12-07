@@ -4,6 +4,7 @@ import { getServerSideProps } from '../utils/helper';
 import { useProfile } from './context/UserContext';
 import axios from 'axios';
 import Cookies from 'js-cookie';
+import styles from '../styles/login.module.scss';
 
 export default function Login() {
   const [email, setEmail] = useState('');
@@ -11,26 +12,26 @@ export default function Login() {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
-  const {profile, setProfile} = useProfile();
+  const { profile, setProfile } = useProfile();
   const router = useRouter();
 
-  const handleProfileHeader = async()=>{
+  const handleProfileHeader = async () => {
     try {
       const token = Cookies.get('authorization');
       const response = await axios.get('/api/profile/getProfile', {
-      headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       const { username, profilePicture } = response.data;
       setProfile({
-          username,
-          profilePicture: profilePicture || './defaultProfile.png',
+        username,
+        profilePicture: profilePicture || './defaultProfile.png',
       });
     } catch (error) {
       console.error('Error fetching profile:', error);
       logout();
     }
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -50,7 +51,6 @@ export default function Login() {
 
       handleProfileHeader();
       router.push('/');
-
     } else {
       setError(data.message);
       setSuccess('');
@@ -58,125 +58,70 @@ export default function Login() {
   };
 
   return (
-    <div style={styles.container}>
-      <div style={styles.card}>
-        <h2 style={styles.heading}>Login</h2>
-        <form style={styles.form} onSubmit={handleSubmit}>
-          <label style={styles.label}>Email</label>
+    <div className={`${styles.container} flex justify-center items-center h-screen bg-gray-100`}>
+      <div
+        className={`${styles.card} w-full max-w-md p-8 rounded-lg shadow-lg bg-white text-center`}
+      >
+        <h2 className={`${styles.heading} text-2xl font-bold mb-4`}>Login</h2>
+        <form className={`${styles.form} flex flex-col`} onSubmit={handleSubmit}>
+          <label className={`${styles.label} text-left text-sm mb-2 text-gray-700`}>Email</label>
           <input
             type="email"
-            style={styles.input}
+            className={`${styles.input} p-2 mb-4 text-lg border rounded-lg border-gray-300 focus:outline-none`}
             placeholder="Enter your email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
 
-          <label style={styles.label}>Password</label>
+          <label className={`${styles.label} text-left text-sm mb-2 text-gray-700`}>Password</label>
           <input
             type="password"
-            style={styles.input}
+            className={`${styles.input} p-2 mb-4 text-lg border rounded-lg border-gray-300 focus:outline-none`}
             placeholder="Enter your password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
 
-          <div style={styles.checkboxContainer}>
+          <div className={`${styles.checkboxContainer} flex items-center mb-4`}>
             <input
               type="checkbox"
               id="rememberMe"
+              className="mr-2"
               checked={rememberMe}
               onChange={(e) => setRememberMe(e.target.checked)}
             />
-            <label htmlFor="rememberMe" style={styles.checkboxLabel}>Remember Me</label>
+            <label
+              htmlFor="rememberMe"
+              className={`${styles.checkboxLabel} text-sm text-gray-700`}
+            >
+              Remember Me
+            </label>
           </div>
 
-          {error && <p style={styles.error}>{error}</p>}
-          {success && <p style={styles.success}>{success}</p>}
+          {error && <p className={`${styles.error} text-red-500 text-sm mb-4`} id='error'>{error}</p>}
+          {success && <p className={`${styles.success} text-green-500 text-sm mb-4`} id='success' >{success}</p>}
 
-          <button type="submit" style={styles.button}>Login</button>
+          <button
+            type="submit"
+            className={`${styles.button} p-2 text-lg font-bold text-white bg-purple-700 rounded-lg hover:bg-purple-600 transition-colors`}
+          >
+            Login
+          </button>
         </form>
-        <p style={styles.footerText}>
-          Need to create an account? <a href="/register" style={styles.link}>Create Account</a>
+        <p className={`${styles.footerText} mt-4 text-sm text-gray-600`}>
+          Need to create an account?{' '}
+          <a
+            href="/register"
+            className={`${styles.link} font-bold text-purple-700 hover:underline`}
+          >
+            Create Account
+          </a>
         </p>
       </div>
     </div>
   );
 }
 
-
-const styles = {
-  container: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: '100vh',
-    backgroundColor: '#f0f2f5',
-  },
-  card: {
-    width: '100%',
-    maxWidth: '400px',
-    padding: '2rem',
-    borderRadius: '8px',
-    backgroundColor: '#ffffff',
-    boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-    textAlign: 'center',
-  },
-  heading: {
-    fontSize: '24px',
-    marginBottom: '1rem',
-    fontWeight: 'bold',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  label: {
-    fontSize: '14px',
-    marginBottom: '0.5rem',
-    textAlign: 'left',
-    color: '#333333',
-  },
-  input: {
-    padding: '10px',
-    marginBottom: '1rem',
-    fontSize: '16px',
-    borderRadius: '4px',
-    border: '1px solid #cccccc',
-    outline: 'none',
-  },
-  button: {
-    padding: '10px',
-    fontSize: '16px',
-    fontWeight: 'bold',
-    color: '#ffffff',
-    backgroundColor: '#4a3f8e', // Dark purple color for the button
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
-  footerText: {
-    marginTop: '1rem',
-    fontSize: '14px',
-    color: '#666666',
-  },
-  link: {
-    color: '#4a3f8e', // Matching link color
-    textDecoration: 'none',
-    fontWeight: 'bold',
-  },
-  error: {
-    color: 'red',
-    marginBottom: '1rem',
-    fontSize: '14px',
-  },
-  success: {
-    color: 'green',
-    marginBottom: '1rem',
-    fontSize: '14px',
-  },
-};
-
-
-export {getServerSideProps};
+export { getServerSideProps };

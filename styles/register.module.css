@@ -1,0 +1,75 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f2f5;
+}
+
+.card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.heading {
+  font-size: 24px;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 14px;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  color: #333333;
+}
+
+.input {
+  padding: 10px;
+  margin-bottom: 1rem;
+  font-size: 16px;
+  border-radius: 4px;
+  border: 1px solid #cccccc;
+  outline: none;
+}
+
+.button {
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ffffff;
+  background-color: #4a3f8e;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.footerText {
+  margin-top: 1rem;
+  font-size: 14px;
+  color: #666666;
+}
+
+.link {
+  color: #4a3f8e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.error {
+  color: red;
+  margin-bottom: 1rem;
+  font-size: 14px;
+}
+
+/*# sourceMappingURL=register.module.css.map */

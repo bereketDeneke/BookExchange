@@ -4,7 +4,6 @@ import Request from '../../../models/Request';
 import BookOffer from '../../../models/Offer';
 import { z } from 'zod';
 import validator from 'validator';
-import { ObjectId } from 'mongodb';
 
 const JWT_SECRET = process.env.JWT_SECRET || '$ecret';
 
@@ -77,8 +76,8 @@ export default async function handler(req, res) {
 
     // Check for duplicate requests
     const existingRequest = await Request.findOne({
-      requester_user_id:new ObjectId(requester_user_id),
-      book_id: new ObjectId(book_id)
+      requester_user_id:requester_user_id,
+      book_id: book_id
     });
 
     if (existingRequest) {

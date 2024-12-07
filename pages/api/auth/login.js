@@ -1,11 +1,14 @@
 // pages/api/auth/login.js
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import dbConnect from '../../../utils/db';
+import dbConnect from '../../../utils/db.js';
 import User from '../../../models/User';
 import { serialize } from 'cookie';
 import { z } from 'zod';
 import validator from 'validator';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const JWT_SECRET = process.env.JWT_SECRET || '$ecret';
 
@@ -36,7 +39,6 @@ export default async function handler(req, res) {
       if (!user) {
         return res.status(401).json({ message: 'Invalid email or password' });
       }
-
       // Hash the input password and compare with stored hash
       const hashedPassword = await bcrypt.hash(password + sanitizedEmail, user.salt);
       if (hashedPassword !== user.passwordHash) {

@@ -34,7 +34,7 @@ const ProfileCard = () => {
   };
 
   // Handle search and filtering
-  let filteredBooks = offers.filter((offer) =>
+  const filteredBooks = offers.filter((offer) =>
     offer.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 

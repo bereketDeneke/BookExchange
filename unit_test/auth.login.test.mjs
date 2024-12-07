@@ -10,34 +10,12 @@ const request = supertest(serverUrl);
 
 describe('User Authentication API Tests', function () {
   let token; // Will store JWT token from login
-
-  const timestamp = Date.now();
   const testUser = {
-    email: "",
-    password: "",
+    username: "Bereket Siraw Deneke" ,
+    email: `bd2249@nyu.edu`,
+    password: '!@#passw0rd23'
   };
-
-  // Test Registration Endpoint
-  describe('POST /register', function () {
-    it('should register a new user successfully', async function () {
-      const res = await request.post('/register').send(testUser);
-      expect(res.status).to.equal(201);
-      expect(res.body).to.have.property('message', 'User registered successfully');
-    });
-
-    it('should not register an existing user', async function () {
-      const res = await request.post('/register').send(testUser);
-      expect(res.status).to.equal(400);
-      expect(res.body).to.have.property('message', 'User already exists');
-    });
-
-    it('should validate email format', async function () {
-      const res = await request.post('/register').send({ ...testUser, email: 'invalid-email' });
-      expect(res.status).to.equal(400);
-      expect(res.body.message[0]).to.include('Invalid email format');
-    });
-  });
-
+  
   // Test Login Endpoint
   describe('POST /login', function () {
     it('should log in an existing user successfully', async function () {

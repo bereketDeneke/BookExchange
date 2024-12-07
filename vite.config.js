@@ -3,6 +3,8 @@ import eslintPlugin from 'vite-plugin-eslint';
 import fullReload from 'vite-plugin-full-reload';
 import path from 'path';
 
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
 export default defineConfig({
   plugins: [
     eslintPlugin({
