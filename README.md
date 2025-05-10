@@ -104,31 +104,31 @@ The application will store data for **Users**, **Books**, **Requests**, and **Re
 The following wireframes illustrate the main pages for the **Book Exchange and Recommendation Platform**. These images are stored in the `documentation` folder:
 
 1. **Register Page**: A page for new users to sign up by providing their username, first name, last name, email, and password.
-   - ![Register Page](documentation/registration.png)
+   - ![Register Page](documentation/final/registration.png)
 
 2. **Login Page**: A page for existing users to log in with their username and password.
-   - ![Login Page](documentation/login.png)
+   - ![Login Page](documentation/final/login.png)
 
 3. **Books Page**: Displays a list of all available books, with options to search and filter based on status, rating, and type.
-   - ![Books Page](documentation/home.png)
+   - ![Books Page](documentation/final/home.png)
 
 4. **Create Book Listing Page**: A form for users to add a new book, including fields for the book's name, description, availability duration, and type.
-   - ![Create Book Listing Page](documentation/addBook.png)
+   - ![Create Book Listing Page](documentation/final/addBook.png)
 
 5. **Request Page**: A form where users can request a book from another user, specifying details like rental duration, urgency, and reason.
-   - ![Request Page](documentation/requestBook.png)
+   - ![Request Page](documentation/final/requestBook.png)
 
 6. **Profile Page**: Shows the user’s profile details, including name, profile picture, and a list of books they have listed.
-   - ![Profile Page](documentation/profile.png)
+   - ![Profile Page](documentation/final/profile.png)
 
 7. **Book Details Page**: Provides in-depth information about a specific book, including description, history of interactions, and recommendations. Users can also leave their own recommendation on this page.
-   - ![Book Details Page](documentation/bookDetail.png)
+   - ![Book Details Page](documentation/final/bookDetail.png)
 
 8. **My Requests Page**: Displays the status of all requests made by the user, with the ability to view details or cancel pending requests.
-   - ![My Requests Page](documentation/myRequests.png)
+   - ![My Requests Page](documentation/final/myRequests.png)
 
 9. **Incoming Requests for My Books Page**: Shows requests received for the user’s listed books, with options to approve or decline requests.
-   - ![Incoming Requests for My Books](documentation/incomingRequests.png)
+   - ![Incoming Requests for My Books](documentation/final/incomingRequests.png)
 
 ## Site Map
 ![site map](./documentation/sitemap.png)
